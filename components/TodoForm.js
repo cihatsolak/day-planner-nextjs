@@ -1,18 +1,22 @@
 import { Button, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { addDoc, collection, serverTimestamp } from "@firebase/firestore";
 import { db } from "../firebase";
+import { TodoContext } from '../contexts/TodoContext'
 
 export default function TodoForm() {
+    const { showAlert } = useContext(TodoContext);
+
     const [todo, setTodo] = useState({
         title: '',
-        Description: ''
+        description: ''
     })
 
     const handleClick = async (event) => {
         event.preventDefault();
 
         if (todo.title == '' && todo.description == '') {
+            showAlert("error", "Title or description fields cannot be left blank.")
             return;
         }
 
@@ -20,7 +24,7 @@ export default function TodoForm() {
         const docRef = await addDoc(ref, { ...todo, date: serverTimestamp() })
 
         setTodo({ title: '', description: '' });
-        alert(`Added ${docRef.id} id todo.`)
+        showAlert("success", `Added ${docRef.id} id todo.`);
     }
 
     return (
