@@ -9,7 +9,7 @@ import { TodoContext } from '../contexts/TodoContext'
 
 export default function Todo({ id, title, description, date }) {
 
-    const { showAlert } = useContext(TodoContext)
+    const { showAlert, setTodo } = useContext(TodoContext)
 
     const handleDelete = async (id, event) => {
         event.preventDefault();
@@ -21,7 +21,7 @@ export default function Todo({ id, title, description, date }) {
     }
 
     return (
-        <ListItem sx={{ mt: 3, boxShadow: 3 }} style={{ backgroundColor: '#FAFAFA' }} secondaryAction={
+        <ListItem onClick={() => { setTodo({ id, title, description, date }) }} sx={{ mt: 3, boxShadow: 3 }} style={{ backgroundColor: '#FAFAFA' }} secondaryAction={
             <>
                 <IconButton onClick={(event) => handleDelete(id, event)}>
                     <Delete />

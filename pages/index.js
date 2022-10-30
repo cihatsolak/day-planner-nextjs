@@ -17,6 +17,11 @@ export default function Home() {
     setOpen(true);
   }
 
+  const [todo, setTodo] = useState({
+    title: '',
+    description: ''
+  })
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -26,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <TodoContext.Provider value={{ showAlert }}>
+    <TodoContext.Provider value={{ showAlert, todo, setTodo }}>
       <Container maxWidth="md">
         <TodoForm />
         <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={4000} onClose={handleClose}>
