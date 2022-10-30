@@ -1,7 +1,7 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useState, useContext } from "react";
 import { addDoc, collection, serverTimestamp } from "@firebase/firestore";
-import { db } from "../firebase";
+import { db } from '../firebase'
 import { TodoContext } from '../contexts/TodoContext'
 
 export default function TodoForm() {
