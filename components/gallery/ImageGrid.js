@@ -1,9 +1,8 @@
 import { db } from "../../firebase"
 import { collection, onSnapshot, query, orderBy } from "@firebase/firestore"
 import { useEffect, useState } from "react"
-import '../../styles/ImageGrid.module.css'
 
-export default function ImageGrid() {
+export default function ImageGrid({ setSelectedPicture }) {
 
     const [docs, setDocs] = useState([])
 
@@ -24,7 +23,7 @@ export default function ImageGrid() {
     return (
         <div className="img-grid">
             {docs && docs.map(doc => (
-                <div className="img-wrap" key={doc.id}>
+                <div className="img-wrap" key={doc.id} onClick={() => setSelectedPicture(doc.url)}>
                     <img src={doc.url} alt="uploaded image" />
                 </div>
             ))}

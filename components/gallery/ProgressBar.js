@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { storage, db } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import '../../styles/ProgressBar.module.css'
 
 export default function ProgressBar({ file, setFile }) {
 
