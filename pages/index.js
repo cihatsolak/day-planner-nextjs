@@ -6,9 +6,11 @@ import { TodoContext } from '../contexts/TodoContext'
 import { AuthContext } from '../contexts/AuthContext'
 import { useState, useContext } from 'react'
 import { auth } from '../firebase'
+import { useRouter } from 'next/router'
 
 export default function Home() {
 
+  const router = useRouter()
   const { currentUser } = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
@@ -34,6 +36,11 @@ export default function Home() {
     setOpen(false);
   };
 
+  const redirectGallery = (event) => {
+    event.preventDefault();
+    router.push('/gallery');
+  }
+
   return (
     <TodoContext.Provider value={{ showAlert, todo, setTodo }}>
       <Container maxWidth="md">
@@ -48,6 +55,7 @@ export default function Home() {
           <Typography variant="h5">
             {currentUser.displayName}
           </Typography>
+          <Button variant="contained" color="success" onClick={redirectGallery}>Gallery</Button>
           <Button variant="contained" color="primary" onClick={() => auth.signOut()}>Çıkış</Button>
         </Box>
 
