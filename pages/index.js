@@ -4,7 +4,6 @@ import TodoList from '../components/TodoList'
 import TodoForm from '../components/TodoForm'
 import { TodoContext } from '../contexts/TodoContext'
 import { useState } from 'react'
-import Loading  from '../components/Loading'
 
 export default function Home() {
 
@@ -31,11 +30,14 @@ export default function Home() {
     setOpen(false);
   };
 
-  return <Loading type="spinningBubbles" color="gray" />;
-  
   return (
     <TodoContext.Provider value={{ showAlert, todo, setTodo }}>
       <Container maxWidth="md">
+        <Head>
+          <title>Day Planner App</title>
+          <meta name="description" context="" />
+          <link rel='icon' href="/favicon.ico" />
+        </Head>
         <TodoForm />
         <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={4000} onClose={handleClose}>
           <Alert onClose={handleClose} severity={alertType} sx={{ width: '100%' }}>
