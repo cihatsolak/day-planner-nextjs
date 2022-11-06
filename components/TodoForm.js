@@ -3,9 +3,11 @@ import { useContext, useRef, useEffect } from "react";
 import { addDoc, collection, serverTimestamp, updateDoc, doc } from "@firebase/firestore";
 import { db } from '../firebase'
 import { TodoContext } from '../contexts/TodoContext'
+import { AuthContext } from '../contexts/AuthContext'
 
 export default function TodoForm() {
 
+    const { currentUser } = useContext(AuthContext);
     const { showAlert, todo, setTodo } = useContext(TodoContext);
     const selectedRef = useRef();
 
@@ -28,7 +30,7 @@ export default function TodoForm() {
             showAlert("success", `updated todo`)
         } else {
             const ref = collection(db, 'todos');
-            const docRef = await addDoc(ref, { ...todo, date: serverTimestamp() })
+            const docRef = await addDoc(ref, { ...todo, email: currentUser.email, date: serverTimestamp() })
             showAlert("success", `Added ${docRef.id} id todo.`);
         }
 
